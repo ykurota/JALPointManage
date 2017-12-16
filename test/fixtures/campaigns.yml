@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ctype: MyString
+  ctypedetail: MyString
+  bway: MyString
+  bpoint: 1.5
+
+two:
+  ctype: MyString
+  ctypedetail: MyString
+  bway: MyString
+  bpoint: 1.5

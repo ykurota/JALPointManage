@@ -1,0 +1,113 @@
+<table class="form">
+<%= form_tag(controller: "jalpoint", action: "index", :remote => true) do %>
+<tr>
+	<td>USER</td>
+	<td><%= text_field_tag("user") %></td>
+</tr>
+<tr>
+	<td>Flight Date</td>
+	<td><%= date_field_tag("flightdate") %></td>
+</tr>
+<tr>
+	<td>Departure</td>
+	<td>
+    <%= select_tag :departure, options_from_collection_for_select(City.all, :cityname,:cityname), :include_blank => true %>
+    </td>
+    <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
+    <a href="/cities">※都市管理ページ</a></td>
+</tr>
+<tr>
+    <td>Destination</td>
+    <td>
+    <%= select_tag :destination, options_from_collection_for_select(City.all,
+     :cityname,:cityname), :include_blank => true %>
+    </td>
+</tr>
+<tr>
+    <td>Flight Class</td>
+    <td>
+    <%= select_tag :flightclass, options_from_collection_for_select(Flightclass.all, 
+     :flightclass,:flightclass), :include_blank => true %>
+    </td>
+    <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
+    <a href="/flightclasses">※クラス管理ページ</a></td>
+</tr>
+<tr>
+    <td>Mileage</td>
+    <td><%= number_field_tag("mileage", {controller: "jalpoint",action: "calpoint"}, :remote => true) %></td>
+    <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
+    <a href="/campaigns">※ポイントキャンペーン管理ページ</a></td>
+</tr>
+<tr>
+    <td>Registered Mileage</td>
+    <td><%= number_field_tag("registeredmileage") %></td>
+</tr>
+<!--<td>Fly On Point</td>
+<td><%= number_field_tag("fop") %></td>
+</tr>-->
+<div class="preview demo3">
+<input type="text" val="" /> + <input type="text" val="" /> = <input type="text" val="" disabled="disabled" />
+</div>
+<tr>
+<td>Registered Fly On Point</td>
+<td><%= number_field_tag("registeredfop") %></td>
+</tr>
+<tr>
+<td style="background-color:#FFFFFF;"></td>
+<td style="background-color:#FFFFFF;">
+<%= submit_tag("Add" ,:style => "WIDTH:200px;HEIGHT:50px;color:blue; font-size:20pt") %></td>
+</tr>
+<% end %>
+</table>
+
+
+<table class="form">
+<tr>
+    <td>Mileage</td>
+    <td>FOP</td>
+    <td>JGC</td>
+</tr>
+<tr>
+    <td><%= @total.registeredmileage %></td>
+    <td><%= @total.registeredfop %></td>
+    <td><%= 50000 - @total.registeredfop %></td>
+</tr>
+</table>
+
+
+
+
+<table>
+<tr>
+    <th>ID</th>
+	<th>USER</th>
+    <th>FlightDate</th>
+    <th>Depature</th>
+    <th>Destination</th>
+    <th>FlightClass</th>
+    <th>Mileage</th>
+    <th>RegistedMileage</th>
+    <th>FOP</th>
+    <th>RegistedFOP</th>
+    <th>UpdateTime</th>
+    <th>Edit</th>
+    <th>Delete</th>
+</tr>
+<% @mile.each do |obj| %>
+<tr>
+    <td><a href="/jalpoint/edit/<%= obj.id %>"><%= obj.id %></a></td>
+	<td><%= obj.username %></td>
+    <td><%= obj.flightdate %></td>
+    <td><%= obj.departure %></td>
+    <td><%= obj.destination %></td>
+    <td><%= obj.flightclass %></td>
+    <td><%= obj.mileage %></td>
+    <td><%= obj.registeredmileage %></td>
+    <td><%= obj.fop %></td>
+    <td><%= obj.registeredfop %></td>
+    <td><%= obj.updated_at %></td>
+    <td><a href="/jalpoint/edit/<%= obj.id %>">Edit</a></td>
+    <td><a href="javascript:delData(<%= obj.id %>);">Delete</a></td>
+</tr>
+<% end %>
+</table>

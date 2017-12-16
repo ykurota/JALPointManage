@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Flightclass:</strong>
+  <%= @flightclass.flightclass %>
+</p>
+
+<p>
+  <strong>Classcode:</strong>
+  <%= @flightclass.classcode %>
+</p>
+
+<p>
+  <strong>Addon:</strong>
+  <%= @flightclass.addon %>
+</p>
+
+<%= link_to 'Edit', edit_flightclass_path(@flightclass) %> |
+<%= link_to 'Back', flightclasses_path %>

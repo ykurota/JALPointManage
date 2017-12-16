@@ -1,0 +1,2 @@
+module PointManagementHelper
+end

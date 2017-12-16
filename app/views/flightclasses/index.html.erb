@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Flightclasses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flightclass</th>
+      <th>Classcode</th>
+      <th>Addon</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @flightclasses.each do |flightclass| %>
+      <tr>
+        <td><%= flightclass.flightclass %></td>
+        <td><%= flightclass.classcode %></td>
+        <td><%= flightclass.addon %></td>
+        <td><%= link_to 'Show', flightclass %></td>
+        <td><%= link_to 'Edit', edit_flightclass_path(flightclass) %></td>
+        <td><%= link_to 'Destroy', flightclass, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Flightclass', new_flightclass_path %>
+
+<br>
+<br>
+<%= link_to 'JalPointManage', '/jalpoint' %>

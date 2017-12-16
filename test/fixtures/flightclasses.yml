@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flightclass: MyString
+  classcode: MyString
+  addon: 1
+
+two:
+  flightclass: MyString
+  classcode: MyString
+  addon: 1

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ctype:</strong>
+  <%= @campaign.ctype %>
+</p>
+
+<p>
+  <strong>Ctypedetail:</strong>
+  <%= @campaign.ctypedetail %>
+</p>
+
+<p>
+  <strong>Bway:</strong>
+  <%= @campaign.bway %>
+</p>
+
+<p>
+  <strong>Bpoint:</strong>
+  <%= @campaign.bpoint %>
+</p>
+
+<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'Back', campaigns_path %>

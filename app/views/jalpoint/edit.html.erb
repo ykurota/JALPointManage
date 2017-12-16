@@ -1,0 +1,39 @@
+<h1>Edit</h1>
+
+	<%= form_for(@mile, url:{controller:'jalpoint', action:'update', id:@mile.id}) do |form| %>
+	<table>
+	<tr><th>USER</th>
+		<td><%= form.text_field :username %></td></tr>
+	<tr><th>Flight Date</th>
+		<td><%= form.date_field :flightdate %></td></tr>
+	<tr><th>Departure</th>
+		<td>
+    <%= form.select :departure, City.all.map{|c| [c.cityname, c.cityname]} %>
+    </td>
+    <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
+    <a href="/cities">※都市管理ページ</a></td></tr>
+    <tr><th>Destination</th>
+		<td>
+    <%= form.select :destination, City.all.map{|c| [c.cityname, c.cityname]} %>
+    </td></tr>
+    <tr><th>Flight Class</th>
+		<td>
+		<%= form.select :flightclass, Flightclass.all.map{|f| [f.flightclass, f.flightclass]} %>
+		</td>
+		<td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
+    <a href="/flightclasses">※クラス管理ページ</a></td></tr>
+    <tr><th>mileage</th>
+		<td><%= form.text_field :mileage %></td></tr>
+    <tr><th>Registered Mileage</th>
+		<td><%= form.text_field :registeredmileage %></td></tr>
+    <tr><th>Fly On Point</th>
+		<td><%= form.text_field :fop %></td></tr>
+    <tr><th>Registered Fly On Point</th>
+		<td><%= form.text_field :registeredfop %></td></tr>
+	</tr>
+	<tr><th></th>
+		<td><%= form.submit "送信" %></td>
+		<td><input type="button" onclick="location.href='/jalpoint'"value="戻る"></td></tr>
+	</tr>
+	</table>
+	<% end %>

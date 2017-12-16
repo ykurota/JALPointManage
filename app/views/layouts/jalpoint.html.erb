@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JalPoint</title>
+		<%= csrf_meta_tags %>
+
+
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
+
+
+	<body>
+		<h1 class="title">マイル・FOP</h1>
+		<%= yield %>
+		<div class="footer">copyright Yukihiro Kurotani. 2017</div>
+	</body>
+</html>
