@@ -6,6 +6,7 @@ class JalpointController < ApplicationController
       puts "start initialize"
       super
       begin
+        #@registeredmileage = '0'
         @mile = Mile.all
         #@jalpoint_data = JSON.parse(File.read("data.txt"))
         t = Mile.arel_table
@@ -77,12 +78,15 @@ def calpoint
     mlgadn = Flightclass.select('addon').find_by(flightclass: flc)
     mlgcrd = Campaign.select('bpoint').find_by(ctype: 'JALCard')
     puts mlgadn.addon
-    registeredmileage = mlg.to_f * mlgadn.addon.to_f / 100 * mlgcrd.bpoint.to_f
+    fregisteredmileage = mlg.to_f * mlgadn.addon.to_f / 100 * mlgcrd.bpoint.to_f
+    @registeredmileage = fregisteredmileage.to_i
     puts 'registered'
-    puts registeredmileage
-    registeredfop = mlg.to_f * fopmbp.bpoint.to_f + foppbp.to_f
-    puts registeredfop
-
+    puts @registeredmileage
+    fregisteredfop = mlg.to_f * fopmbp.bpoint.to_f + foppbp.to_f
+    @registeredfop = fregisteredfop.to_i
+    puts @registeredfop
+    data = {:registeredmileage => @registeredmileage, :registeredfop => @registeredfop}
+    render :json => data
   end 
 end
 

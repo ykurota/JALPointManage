@@ -25,26 +25,26 @@ function delData(num){
 jQuery(function($){
     $('input#mileage').keyup(function(){
         $.ajax({
+            //url: "#{jalpoint_calpoint_path}",
             url: "jalpoint/calpoint",
             type: "GET",
             data: { departure : $('select#departure').val(),
                     destination : $('select#destination').val(),
                     flightclass : $('select#flightclass').val(),
-                    mileage : $('input#mileage').val(),
-                    id: 1,
-                    mode: 'hoge',
-                    type: 'entry'
+                    mileage : $('input#mileage').val()
                     },
-            dataType: "html",
-                    //success: function(data) {
-                    //    alert("success");
-                    //},
+            dataType: "json",
+                    success: function(data) {
+                      $('input#registeredmileage').val(data.registeredmileage);
+                      $('input#registeredfop').val(data.registeredfop);
+                    }
                     //error: function(data) {
                     //    alert("errror");
                     //}
     });
   });
 });
+
 
 jQuery(function($){
     $('input','.demo3').keyup(function(){
