@@ -44,27 +44,3 @@ jQuery(function($){
     });
   });
 });
-
-
-jQuery(function($){
-    $('input','.demo3').keyup(function(){
-      var numA = $('input:eq(0)','.demo3').val();
-      var numB = $('input:eq(1)','.demo3').val();
-      //parseIntで文字列を数値に
-      numA = parseInt(numA);
-      numB = parseInt(numB);
-      //左側の入力値が数値では無い場合の処理
-      if(!numA){
-        //計算結果表示のinput内を削除
-        $('input:eq(2)','.demo3').val('');
-        return false;
-      };
-      //右側の入力値が数値では無い場合の処理
-      if(!numB){
-        //計算結果表示のinput内を削除
-        $('input:eq(2)','.demo3').val('');
-        return false;
-      };
-      $('input:eq(2)','.demo3').val(numA+numB);
-    });
-  });

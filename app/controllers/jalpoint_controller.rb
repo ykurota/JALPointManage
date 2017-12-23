@@ -60,31 +60,26 @@ def calpoint
   dst = params['destination']
   flc = params['flightclass']
   mlg = params['mileage']
+  dptara = City.select('area').find_by(cityname: dpt)
+  dstara = City.select('area').find_by(cityname: dst)
   if !dpt.empty? && !dst.empty? && !flc.empty? && !mlg.empty? \
-     && (dpt.in?(['羽田','成田']) || dst.in?(['羽田','成田'])) then
+     && (dptara.area == 'japan' || dstara.area == 'japan') then
     puts 'calpoint2'
-    if dpt.in?(['羽田','成田']) then
-      puts dst
-      ara = City.select('area').find_by(cityname: dst)
+    if dptara.area == 'japan' then
+      ara = dstara
     else
-      puts dpt
-      ara = City.select('area').find_by(cityname: dpt)
+      ara = dptara
     end
-    puts ara.area
     fopmbp = Campaign.select('bpoint').find_by(ctypedetail: ara.area)
     foppbp = Campaign.where(bway: "+fop").sum(:bpoint)
-    puts fopmbp.bpoint
-    puts foppbp
     mlgadn = Flightclass.select('addon').find_by(flightclass: flc)
     mlgcrd = Campaign.select('bpoint').find_by(ctype: 'JALCard')
-    puts mlgadn.addon
-    fregisteredmileage = mlg.to_f * mlgadn.addon.to_f / 100 * mlgcrd.bpoint.to_f
+    mlgadclas = mlg.to_f * mlgadn.addon.to_f / 100
+    fregisteredmileage = mlgadclas * mlgcrd.bpoint.to_f
     @registeredmileage = fregisteredmileage.to_i
     puts 'registered'
-    puts @registeredmileage
-    fregisteredfop = mlg.to_f * fopmbp.bpoint.to_f + foppbp.to_f
+    fregisteredfop = mlgadclas * fopmbp.bpoint.to_f + foppbp.to_f
     @registeredfop = fregisteredfop.to_i
-    puts @registeredfop
     data = {:registeredmileage => @registeredmileage, :registeredfop => @registeredfop}
     render :json => data
   end 
