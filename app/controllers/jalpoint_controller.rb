@@ -1,4 +1,5 @@
 class JalpointController < ApplicationController
+  before_action :authenticate_user!, only: :index
 	layout 'jalpoint'
   
 
@@ -7,16 +8,19 @@ class JalpointController < ApplicationController
       super
       begin
         #@registeredmileage = '0'
-        @mile = Mile.all
+        @user = current_user
+        #@mile = Mile.all
+        @mile = Mile.where(username: @user.email)
         #@jalpoint_data = JSON.parse(File.read("data.txt"))
         t = Mile.arel_table
-        @total = Mile.select([t[:registeredmileage].sum.as('registeredmileage'),
+        @total = Mile.where(username: @user.email).select([t[:registeredmileage].sum.as('registeredmileage'),
           t[:registeredfop].sum.as('registeredfop')]).all[0]
       rescue
         #@jalpoint_data = Hash.new
         @mile = Hash.new
         @total = Hash.new
         puts "rescue"
+        #redirect_to '/'
       end
 =begin
       @jalpoint_data.each do |key,obj|
@@ -32,6 +36,7 @@ class JalpointController < ApplicationController
 
 def edit
   puts 'edit'
+  @user = current_user
   @mile = Mile.find(params[:id])
 end
 
@@ -100,10 +105,13 @@ end
 
     def index
       puts "index"
-      @mile = Mile.all
+      @user = current_user
+      @total = {'registeredmileage' => 0, 'registeredfop' => 0}
+      #@mile = Mile.all
+      @mile = Mile.where(username: @user.email)
       if request.post? then
         obj = MyData.new(
-          user:params['user'],
+          user:@user.email,
           flightdate:params['flightdate'],
           departure:params['departure'],
           destination:params['destination'],
@@ -112,13 +120,9 @@ end
           registeredmileage:params['registeredmileage'],
           fop:params['fop'],
           registeredfop:params['registeredfop'])
-        #@jalpoint_data[Time.now.to_i] = obj
-        #data = @jalpoint_data.to_json
-        #File.write("data.txt", data)
-        #@jalpoint_data = JSON.parse(data)
 
         @mileobj = Mile.create(
-          username:params['user'],
+          username:@user.email,
           flightdate:params['flightdate'],
           departure:params['departure'],
           destination:params['destination'],
@@ -133,7 +137,7 @@ end
           updated_at:params[Time.now])
       end
       t = Mile.arel_table
-      @total = Mile.select([t[:registeredmileage].sum.as('registeredmileage'),
+      @total = Mile.where(username: @user.email).select([t[:registeredmileage].sum.as('registeredmileage'),
         t[:registeredfop].sum.as('registeredfop')]).all[0]
       puts "test"
       puts @total.registeredmileage

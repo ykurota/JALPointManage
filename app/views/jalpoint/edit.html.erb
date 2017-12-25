@@ -2,8 +2,8 @@
 
 	<%= form_for(@mile, url:{controller:'jalpoint', action:'update', id:@mile.id}) do |form| %>
 	<table>
-	<tr><th>USER</th>
-		<td><%= form.text_field :username %></td></tr>
+	<!--<tr><th>USER</th>
+		<td><%= form.text_field :username %></td></tr>-->
 	<tr><th>Flight Date</th>
 		<td><%= form.date_field :flightdate %></td></tr>
 	<tr><th>Departure</th>
@@ -32,7 +32,7 @@
 		<td><%= form.text_field :registeredfop %></td></tr>
 	</tr>
 	<tr><th></th>
-		<td><%= form.submit "送信" %></td>
+		<td><%= form.submit "UPDATE" %></td>
 		<td><input type="button" onclick="location.href='/jalpoint'"value="戻る"></td></tr>
 	</tr>
 	</table>

@@ -1,9 +1,9 @@
 <table class="form">
 <%= form_tag(controller: "jalpoint", action: "index", :remote => true) do %>
-<tr>
+<!--<tr>
 	<td>USER</td>
-	<td><%= text_field_tag("user") %></td>
-</tr>
+	<td><%= text_field_tag("user", @user.email) %></td>
+</tr>-->
 <tr>
 	<td>Flight Date</td>
 	<td><%= date_field_tag("flightdate") %></td>
@@ -57,6 +57,10 @@
 <% end %>
 </table>
 
+<div style="font-size:15pt;color:blue;">
+<%=link_to ' logout&gt;&gt;' .html_safe, destroy_user_session_path, method: :delete %>
+</div>
+<br>
 
 <table class="form">
 <tr>
@@ -67,17 +71,15 @@
 <tr>
     <td><%= @total.registeredmileage %></td>
     <td><%= @total.registeredfop %></td>
-    <td><%= 50000 - @total.registeredfop %></td>
+    <td><%= 50000 - @total.registeredfop.to_i %></td>
 </tr>
 </table>
 
 
-
-
 <table>
 <tr>
-    <th>ID</th>
-	<th>USER</th>
+    <!--<th>ID</th>
+	<th>USER</th>-->
     <th>FlightDate</th>
     <th>Depature</th>
     <th>Destination</th>
@@ -92,8 +94,8 @@
 </tr>
 <% @mile.each do |obj| %>
 <tr>
-    <td><a href="/jalpoint/edit/<%= obj.id %>"><%= obj.id %></a></td>
-	<td><%= obj.username %></td>
+    <!--<td><a href="/jalpoint/edit/<%= obj.id %>"><%= obj.id %></a></td>
+	<td><%= obj.username %></td>-->
     <td><%= obj.flightdate %></td>
     <td><%= obj.departure %></td>
     <td><%= obj.destination %></td>
