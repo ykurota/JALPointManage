@@ -1,28 +1,31 @@
 class JalpointController < ApplicationController
-  before_action :authenticate_user!, only: :index
+  before_action :authenticate_user!, only: [ :index, :edit, :update, :delete]
 	layout 'jalpoint'
   
-
+=begin
     def initialize
       puts "start initialize"
       super
       begin
+        puts "begin"
         #@registeredmileage = '0'
-        @user = current_user
+        #@user = current_user
         #@mile = Mile.all
         @mile = Mile.where(username: @user.email)
         #@jalpoint_data = JSON.parse(File.read("data.txt"))
         t = Mile.arel_table
         @total = Mile.where(username: @user.email).select([t[:registeredmileage].sum.as('registeredmileage'),
           t[:registeredfop].sum.as('registeredfop')]).all[0]
+        puts "begin-end"
       rescue
         #@jalpoint_data = Hash.new
-        @mile = Hash.new
-        @total = Hash.new
+        #@mile = Hash.new
+        #@total = Hash.new
         puts "rescue"
-        #redirect_to '/'
+        #reset_session
+        #redirect_to '/users/sign_in'
       end
-=begin
+begin
       @jalpoint_data.each do |key,obj|
         if Time.now.to_i - key.to_i > 24*60*60 then
           @jalpoint_data.delete(key)
@@ -30,9 +33,9 @@ class JalpointController < ApplicationController
 
       end
       File.write("data.txt", @jalpoint_data.to_json)
-=end
+end
     end
-
+=end
 
 def edit
   puts 'edit'
@@ -61,6 +64,7 @@ end
 
 def calpoint
   puts 'calpoint'
+  @user = current_user
   dpt = params['departure']
   dst = params['destination']
   flc = params['flightclass']

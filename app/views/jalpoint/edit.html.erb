@@ -8,17 +8,17 @@
 		<td><%= form.date_field :flightdate %></td></tr>
 	<tr><th>Departure</th>
 		<td>
-    <%= form.select :departure, City.all.map{|c| [c.cityname, c.cityname]} %>
+    <%= form.select :departure, City.all.map{|c| [c.cityname, c.cityname]}, :include_blank => true %>
     </td>
     <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
     <a href="/cities">※都市管理ページ</a></td></tr>
     <tr><th>Destination</th>
 		<td>
-    <%= form.select :destination, City.all.map{|c| [c.cityname, c.cityname]} %>
+    <%= form.select :destination, City.all.map{|c| [c.cityname, c.cityname]}, :include_blank => true %>
     </td></tr>
     <tr><th>Flight Class</th>
 		<td>
-		<%= form.select :flightclass, Flightclass.all.map{|f| [f.flightclass, f.flightclass]} %>
+		<%= form.select :flightclass, Flightclass.all.map{|f| [f.flightclass, f.flightclass]}, :include_blank => true %>
 		</td>
 		<td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
     <a href="/flightclasses">※クラス管理ページ</a></td></tr>

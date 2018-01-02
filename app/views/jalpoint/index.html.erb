@@ -13,8 +13,10 @@
 	<td>
     <%= select_tag :departure, options_from_collection_for_select(City.all, :cityname,:cityname), :include_blank => true %>
     </td>
+    <% if @user.adminflag == 1 then %>
     <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
     <a href="/cities">※都市管理ページ</a></td>
+    <% end %>
 </tr>
 <tr>
     <td>Destination</td>
@@ -27,16 +29,22 @@
     <td>Flight Class</td>
     <td>
     <%= select_tag :flightclass, options_from_collection_for_select(Flightclass.all, 
-     :flightclass,:flightclass), :include_blank => true %>
+     :flightclass,:flightclass), :include_blank => true, :remote => true %>
     </td>
+    <% if @user.adminflag == 1 then %>
     <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
     <a href="/flightclasses">※クラス管理ページ</a></td>
+    <% end %>
 </tr>
 <tr>
     <td>Mileage</td>
-    <td><%= number_field_tag("mileage", {controller: "jalpoint", action: "calpoint"}, :remote => true) %></td>
+    <td>
+    <%= number_field_tag("mileage", {controller: "jalpoint", action: "calpoint"}, :remote => true) %>
+    </td>
+    <% if @user.adminflag == 1 then %>
     <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
     <a href="/campaigns">※ポイントキャンペーン管理ページ</a></td>
+    <% end %>
 </tr>
 <tr>
     <td>Registered Mileage</td>

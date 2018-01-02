@@ -23,7 +23,7 @@ function delData(num){
 }
 
 jQuery(function($){
-    $('input#mileage').keyup(function(){
+    function cal_event(){
         $.ajax({
             //url: "#{jalpoint_calpoint_path}",
             url: "jalpoint/calpoint",
@@ -42,5 +42,33 @@ jQuery(function($){
                     //    alert("errror");
                     //}
     });
-  });
+  };
+  $('input#mileage').keyup(cal_event);
+  $('select#departure').change(cal_event);
+  $('select#destination').change(cal_event);
+  $('select#flightclass').change(cal_event);
 });
+
+
+// jQuery(function($){
+//     $('select#departure','select#destination','select#flightclass').change(function(){
+//         $.ajax({
+//             //url: "#{jalpoint_calpoint_path}",
+//             url: "jalpoint/calpoint",
+//             type: "GET",
+//             data: { departure : $('select#departure').val(),
+//                     destination : $('select#destination').val(),
+//                     flightclass : $('select#flightclass').val(),
+//                     mileage : $('input#mileage').val()
+//                     },
+//             dataType: "json",
+//                     success: function(data) {
+//                       $('input#registeredmileage').val(data.registeredmileage);
+//                       $('input#registeredfop').val(data.registeredfop);
+//                     }
+//                     //error: function(data) {
+//                     //    alert("errror");
+//                     //}
+//     });
+//   });
+// });
