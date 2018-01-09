@@ -71,6 +71,8 @@ def calpoint
   mlg = params['mileage']
   dptara = City.select('area').find_by(cityname: dpt)
   dstara = City.select('area').find_by(cityname: dst)
+  @registeredmileage = mlg.to_i
+  @registeredfop = mlg.to_i
   if !dpt.empty? && !dst.empty? && !flc.empty? && !mlg.empty? \
      && (dptara.area == 'japan' || dstara.area == 'japan') then
     puts 'calpoint2'
@@ -85,13 +87,13 @@ def calpoint
     mlgcrd = Campaign.select('bpoint').find_by(ctype: 'JALCard')
     mlgadclas = mlg.to_f * mlgadn.addon.to_f / 100
     fregisteredmileage = mlgadclas * mlgcrd.bpoint.to_f
-    @registeredmileage = fregisteredmileage.to_i
+    @registeredmileage = fregisteredmileage.ceil.to_i
     puts 'registered'
     fregisteredfop = mlgadclas * fopmbp.bpoint.to_f + foppbp.to_f
-    @registeredfop = fregisteredfop.to_i
-    data = {:registeredmileage => @registeredmileage, :registeredfop => @registeredfop}
-    render :json => data
-  end 
+    @registeredfop = fregisteredfop.ceil.to_i
+  end
+  data = {:registeredmileage => @registeredmileage, :registeredfop => @registeredfop}
+  render :json => data
 end
 
 def mile_params
