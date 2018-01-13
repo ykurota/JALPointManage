@@ -105,7 +105,8 @@ params.require(:mile).permit(:username,
 :mileage,
 :registeredmileage,
 :fop,
-:registeredfop)
+:registeredfop,
+:price)
 end
 
 
@@ -125,7 +126,8 @@ end
           mileage:params['mileage'],
           registeredmileage:params['registeredmileage'],
           fop:params['fop'],
-          registeredfop:params['registeredfop'])
+          registeredfop:params['registeredfop'],
+          price:params['price'])
 
         @mileobj = Mile.create(
           username:@user.email,
@@ -137,6 +139,7 @@ end
           registeredmileage:params['registeredmileage'],
           fop:params['mileage'],
           registeredfop:params['registeredfop'],
+          price:params['price'],
           registereduser:params['user'],
           updateuser:params['user'],
           created_at:params[Time.now],
@@ -144,7 +147,8 @@ end
       end
       t = Mile.arel_table
       @total = Mile.where(username: @user.email).select([t[:registeredmileage].sum.as('registeredmileage'),
-        t[:registeredfop].sum.as('registeredfop')]).all[0]
+        t[:registeredfop].sum.as('registeredfop'),
+        t[:price].sum.as('price')]).all[0]
       puts "test"
       puts @total.registeredmileage
       puts @total.registeredfop
@@ -164,10 +168,11 @@ end
     attr_accessor :registeredmileage
     attr_accessor :fop
     attr_accessor :registeredfop
+    attr_accessor :price
 
     def initialize user:user, flightdate:flightdate, departure:departure, 
       destination:destination, flightclass:flightclass, mileage:mileage, 
-      registeredmileage:registeredmileage, fop:fop, registeredfop:registeredfop
+      registeredmileage:registeredmileage, fop:fop, registeredfop:registeredfop, price:price
       self.user = user
       self.flightdate = flightdate
       self.departure = departure
@@ -177,6 +182,7 @@ end
       self.registeredmileage = registeredmileage
       self.fop = fop
       self.registeredfop = registeredfop
+      self.price = price
     end
 end
 =begin

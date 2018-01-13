@@ -58,6 +58,10 @@
     <td><%= number_field_tag("registeredfop") %></td>
 </tr>
 <tr>
+    <td>Price</td>
+    <td><%= number_field_tag("price") %></td>
+</tr>
+<tr>
     <td style="background-color:#FFFFFF;"></td>
     <td style="background-color:#FFFFFF;">
     <%= submit_tag("Add" ,:style => "WIDTH:200px;HEIGHT:50px;color:blue; font-size:20pt") %></td>
@@ -75,33 +79,44 @@
     <td>Mileage</td>
     <td>FOP</td>
     <td>JGC</td>
+    <td>Total Price</td>
+    <td>Price / FOP</td>
 </tr>
 <tr>
     <td><%= @total.registeredmileage %></td>
     <td><%= @total.registeredfop %></td>
     <td><%= 50000 - @total.registeredfop.to_i %></td>
+    <td><%= @total.price %></td>
+    <% if @total.price < 50000 then %>
+    <% foprate = @total.price.to_f / @total.registeredfop.to_f %>
+    <% else %>
+    <% foprate = 50000 / @total.registeredfop.to_f %>
+    <% end %>
+    <td><%= foprate.round(2) %></td>
 </tr>
 </table>
 
 
-<table>
+<table rules="all" frame="border" style="table-layout:fixed;">
 <tr>
+    <th> Edit </th>
+    <th> Delete </th>
     <!--<th>ID</th>
 	<th>USER</th>-->
-    <th>FlightDate</th>
-    <th>Depature</th>
-    <th>Destination</th>
-    <th>FlightClass</th>
-    <th>Mileage</th>
-    <th>RegistedMileage</th>
-    <th>FOP</th>
-    <th>RegistedFOP</th>
-    <th>UpdateTime</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    <th> Flight </br> Date </th>
+    <th> Depature </th>
+    <th> Destination </th>
+    <th> Flight </br> Class </th>
+    <th> Mileage </th>
+    <th> Registed </br> Mileage </th>
+    <th> FOP </th>
+    <th> Registed </br> FOP </th>
+    <th> Price </th>
 </tr>
 <% @mile.each do |obj| %>
 <tr>
+    <td><a href="/jalpoint/edit/<%= obj.id %>">Edit</a></td>
+    <td><a href="javascript:delData(<%= obj.id %>);">Delete</a></td>
     <!--<td><a href="/jalpoint/edit/<%= obj.id %>"><%= obj.id %></a></td>
 	<td><%= obj.username %></td>-->
     <td><%= obj.flightdate %></td>
@@ -112,9 +127,7 @@
     <td><%= obj.registeredmileage %></td>
     <td><%= obj.fop %></td>
     <td><%= obj.registeredfop %></td>
-    <td><%= obj.updated_at %></td>
-    <td><a href="/jalpoint/edit/<%= obj.id %>">Edit</a></td>
-    <td><a href="javascript:delData(<%= obj.id %>);">Delete</a></td>
+    <td><%= obj.price %></td>
 </tr>
 <% end %>
 </table>
