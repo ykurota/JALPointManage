@@ -115,7 +115,7 @@ end
       @user = current_user
       @total = {'registeredmileage' => 0, 'registeredfop' => 0}
       #@mile = Mile.all
-      @mile = Mile.where(username: @user.email)
+      @mile = Mile.where(username: @user.email).order('flightdate')
       if request.post? then
         obj = MyData.new(
           user:@user.email,
@@ -146,12 +146,13 @@ end
           updated_at:params[Time.now])
       end
       t = Mile.arel_table
-      @total = Mile.where(username: @user.email).select([t[:registeredmileage].sum.as('registeredmileage'),
-        t[:registeredfop].sum.as('registeredfop'),
-        t[:price].sum.as('price')]).all[0]
-      puts "test"
-      puts @total.registeredmileage
-      puts @total.registeredfop
+      @ttlmilval = Mile.where('username = ? and flightdate >= date(now() - interval 36 month) 
+                          and flightdate <= date(now())',
+                          @user.email).select([t[:registeredmileage].sum.as('registeredmileage')]).all[0]
+      @ttlmilest = Mile.where('username = ? and flightdate >= date(now() - interval 36 month)',
+                          @user.email).select([t[:registeredmileage].sum.as('registeredmileage')]).all[0]
+      @total = Mile.where('flightdate >= date(now() - interval 1 year)', username: @user.email).select(['year(flightdate) as year',t[:registeredfop].sum.as('registeredfop'),
+                          t[:price].sum.as('price')]).group('year(flightdate)').order('year')
     end     
   end
 
