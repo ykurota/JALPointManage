@@ -17,29 +17,70 @@ h1.title {
 
 .form tr td {
 	color: rgb(255, 255, 255);
-	background-color: #999;
+	background-color: rgb(248, 76, 205);
 	padding: 0px 20px;
 	font-size: 14pt;
 }
 
-.total tr td {
-	color: rgb(255, 0, 0);
-	background-color: #999;
-	padding: 0px 20px;
-	font-size: 14pt;
+.regist {
+	display       : inline-block;
+	width: 200px;
+	height: 30px;
+	border-radius : 20%;          /* 角丸       */
+	font-size     : 10pt;        /* 文字サイズ */
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	//padding       : 10px 10px;   /* 余白       */
+	background    : #ff0000;     /* 背景色     */
+	color         : #ffffff;     /* 文字色     */
+	//line-height   : 1em;         /* 1行の高さ  */
+	transition    : .3s;         /* なめらか変化 */
+	box-shadow    : 4px 4px 1px #666666;  /* 影の設定 */
+	border        : 2px solid #ff0000;    /* 枠の指定 */  
 }
 
-th {
-	background-color: rgb(0, 0, 0);
+.regist:hover {
+	box-shadow    : none;        /* カーソル時の影消去 */
+	color         : #ff0000;     /* 背景色     */
+	background    : #ffffff;     /* 文字色     */
+}
+
+.result {
+	border: thin solid black; 
+	text-align: center;
+	border-collapse: collapse;
+	//table-layout: fixed;
+}
+
+.result table {
+	border: thin solid black;
+}
+
+.result td {
+	border: thin solid black; 
+}
+.result th {
+	border: thin solid gray;
+	//border-left: black;
+	//border-right: black;
+	background-color: rgb(38, 18, 110);
 	color: rgb(255, 255, 255);
-	font-size: 14pt;
+	font-size: 10pt;
 	padding: 2px;
 	table-layout: fixed;
 }
 
+.reg thead, tbody {
+    //display: block;
+}
+
+.reg tbody {
+	//overflow-y: scroll;
+    //height: 150px;
+}
 
 .jalpoint tr td {
-	background-color: #eee;
+	//background-color: #eee;
 	color: #666;
 	padding: 10px 5px;
 }

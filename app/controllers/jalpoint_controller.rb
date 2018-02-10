@@ -110,7 +110,7 @@ params.require(:mile).permit(:username,
 end
 
 
-    def index
+  def index
       puts "index"
       @user = current_user
       @total = {'registeredmileage' => 0, 'registeredfop' => 0}
@@ -151,7 +151,13 @@ end
                           @user.email).select([t[:registeredmileage].sum.as('registeredmileage')]).all[0]
       @ttlmilest = Mile.where('username = ? and flightdate >= date(now() - interval 36 month)',
                           @user.email).select([t[:registeredmileage].sum.as('registeredmileage')]).all[0]
-      @total = Mile.where('flightdate >= date(now() - interval 1 year)', username: @user.email).select(['year(flightdate) as year',t[:registeredfop].sum.as('registeredfop'),
+      @nowrank = Mile.where('username = ? and flightdate >= year(date(now())) and flightdate <= date(now())',
+                          @user.email).select([t[:registeredfop].sum.as('nowfop')]).all[0]
+      puts 'put nowrank'
+      puts @nowrank.nowfop
+      @total = Mile.where('username = ? and flightdate >= date(now() - interval 1 year)',
+                          @user.email).select(['year(flightdate) as year',
+                          t[:registeredfop].sum.as('registeredfop'),
                           t[:price].sum.as('price')]).group('year(flightdate)').order('year')
     end     
   end

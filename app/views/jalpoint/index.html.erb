@@ -1,9 +1,79 @@
+<div style="font-size:12pt;color:blue;">
+<%=link_to ' ログアウト&gt;&gt;' .html_safe, destroy_user_session_path, method: :delete %>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.jal.co.jp/cgi-bin/jal/milesearch/save/flt_mile_save.cgi" target="_blank">JAL計算ページ&gt;&gt;</a>
+</div>
+</br>
+
+<table class="result" rules="all">
+<tr>
+    <th>登録済</br>マイル</th>
+    <th>登録</br>予定込み</br>マイル</th>
+    <th>現在の</br>達成ランク</th>
+    <th>現在の</br>FLY ONポイント</th>
+</tr>
+<tr>
+    <td><%= @ttlmilval.registeredmileage.to_s(:delimited) %></td>
+    <td><%= @ttlmilest.registeredmileage.to_s(:delimited) %></td>
+    <% if @nowrank.nowfop >= 100000 then %>
+    <% rank = "ダイヤモンド" %>
+    <% elsif @nowrank.nowfop >= 80000 && @nowrank.nowfop < 100000 then %>
+    <% rank = "プレミア" %>
+    <% elsif @nowrank.nowfop >= 50000 && @nowrank.nowfop < 80000 then %>
+    <% rank = "サファイア" %>
+    <% elsif @nowrank.nowfop >= 30000 && @nowrank.nowfop < 50000 then %>
+    <% rank = "クリスタル" %>
+    <% elsif @nowrank.nowfop < 30000 then %>
+    <% rank = "なし" %>
+    <% end %>
+    <td><%= rank %></td>
+    <td><%= @nowrank.nowfop.to_s(:delimited) %></td>
+</tr>
+</tabel>
+
+<table style="border-spacing: 10px;">
+<tr></tr>
+</table>
+
+<table class="result" rules="all">
+<tr>
+    <th>年</th>
+    <th>FLY ON</br>ポイント</th>
+    <th>次の</br>JGCRankまで</br>必要FOP</th>
+    <th>総額金額</th>
+    <th>FLY ON</br>ポイント</br>単価</th>
+    <th>達成</br>JGC単価</th>
+</tr>
+<% @total.each do |fopyear| %>
+<tr>
+    <td><%= fopyear.year %></td>
+    <td><%= fopyear.registeredfop.to_s(:delimited) %></td>
+        <% if fopyear.registeredfop.to_i < 50000 then %>
+        <% nextjgc = 50000 - fopyear.registeredfop.to_i %>
+        <% elsif fopyear.registeredfop.to_i >= 50000 && fopyear.registeredfop.to_i < 80000 then %>
+        <% nextjgc = 80000 - fopyear.registeredfop.to_i %>
+        <% elsif fopyear.registeredfop.to_i >= 80000 && fopyear.registeredfop.to_i < 100000 then %>
+        <% nextjgc = 100000 - fopyear.registeredfop.to_i %>
+        <% else %>
+        <% nextjgc = 0 %>
+        <% end %>
+    <td><%= nextjgc.to_s(:delimited) %></td>
+    <td><%= fopyear.price.to_s(:delimited) %>円</td>
+        <% foprate = fopyear.price.to_f / fopyear.registeredfop.to_f%>
+    <td><%= foprate.round(2) %>円</td>
+        <% if fopyear.registeredfop.to_i < 50000 then %>
+        <% jgcrate = fopyear.price.to_f / fopyear.registeredfop.to_f %>
+        <% else %>
+        <% jgcrate = fopyear.price.to_f / 50000 %>
+        <% end %>
+    <td><%= jgcrate.round(2) %>円</td>
+</tr>
+<% end %>
+</table>
+</br>
+
 <table class="form">
 <%= form_tag(controller: "jalpoint", action: "index", :remote => true) do %>
-<!--<tr>
-	<td>USER</td>
-	<td><%= text_field_tag("user", @user.email) %></td>
-</tr>-->
 <tr>
 	<td>出発日</td>
 	<td><%= date_field_tag("flightdate") %></td>
@@ -15,7 +85,7 @@
     </td>
     <% if @user.adminflag == 1 then %>
     <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
-    <a href="/cities">※都市管理ページ</a></td>
+    <a href="/cities" target="_blank">※都市管理ページ</a></td>
     <% end %>
 </tr>
 <tr>
@@ -33,7 +103,7 @@
     </td>
     <% if @user.adminflag == 1 then %>
     <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
-    <a href="/flightclasses">※クラス管理ページ</a></td>
+    <a href="/flightclasses" target="_blank">※クラス管理ページ</a></td>
     <% end %>
 </tr>
 <tr>
@@ -43,7 +113,7 @@
     </td>
     <% if @user.adminflag == 1 then %>
     <td style="background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); font-size:10pt">
-    <a href="/campaigns">※ポイントキャンペーン管理ページ</a></td>
+    <a href="/campaigns" target="_blank">※ポイントキャンペーン管理ページ</a></td>
     <% end %>
 </tr>
 <tr>
@@ -64,70 +134,16 @@
 <tr>
     <td style="background-color:#FFFFFF;"></td>
     <td style="background-color:#FFFFFF;">
-    <%= submit_tag("登録" ,:style => "WIDTH:200px;HEIGHT:50px;color:blue; font-size:20pt") %></td>
+    <%= submit_tag("登録", :class=>"regist" )%></td>
 </tr>
 <% end %>
 </table>
 
-<div style="font-size:15pt;color:blue;">
-<%=link_to ' ログアウト&gt;&gt;' .html_safe, destroy_user_session_path, method: :delete %>
-</div>
-<br>
-
-<table class="form">
-<tr>
-    <td>登録済</br>マイル</td>
-    <td>登録</br>予定込み</br>マイル</td>
-</tr>
-<tr>
-    <td><%= @ttlmilval.registeredmileage %></td>
-    <td><%= @ttlmilest.registeredmileage %></td>
-</tr>
-</tabel>
-
-<table class="form">
-<tr>
-    <td>年</td>
-    <td>FLY ON</br>ポイント</td>
-    <td>次の</br>JGCRankまで</br>必要FOP</td>
-    <td>総額金額</td>
-    <td>FLY ON</br>ポイント</br>単価</td>
-    <td>達成</br>JGC単価</td>
-</tr>
-<% @total.each do |fopyear| %>
-<tr>
-    <td><%= fopyear.year %></td>
-    <td><%= fopyear.registeredfop %></td>
-        <% if fopyear.registeredfop.to_i < 50000 then %>
-        <% nextjgc = 50000 - fopyear.registeredfop.to_i %>
-        <% elsif fopyear.registeredfop.to_i >= 50000 && fopyear.registeredfop.to_i < 80000 then %>
-        <% nextjgc = 80000 - fopyear.registeredfop.to_i %>
-        <% elsif fopyear.registeredfop.to_i >= 80000 && fopyear.registeredfop.to_i < 100000 then %>
-        <% nextjgc = 100000 - fopyear.registeredfop.to_i %>
-        <% else %>
-        <% nextjgc = 0 %>
-        <% end %>
-    <td><%= nextjgc %></td>
-    <td><%= fopyear.price %>円</td>
-        <% foprate = fopyear.price.to_f / fopyear.registeredfop.to_f%>
-    <td><%= foprate.round(2) %>円</td>
-        <% if fopyear.registeredfop.to_i < 50000 then %>
-        <% jgcrate = fopyear.price.to_f / fopyear.registeredfop.to_f %>
-        <% else %>
-        <% jgcrate = fopyear.price.to_f / 50000 %>
-        <% end %>
-    <td><%= jgcrate.round(2) %>円</td>
-</tr>
-<% end %>
-</table>
-
-
-<table rules="all" frame="border" style="table-layout:fixed;">
+<table class="result"  rules="groups">
+<thead class="reg">
 <tr>
     <th> 修正 </th>
     <th> 削除 </th>
-    <!--<th>ID</th>
-	<th>USER</th>-->
     <th> 出発日 </th>
     <th> 出発 </th>
     <th> 到着 </th>
@@ -138,21 +154,22 @@
     <th> 登録 </br> FLY ON</br>ポイント </th>
     <th> 金額 </th>
 </tr>
+</thead>
 <% @mile.each do |obj| %>
+<tbody class="reg">
 <tr>
     <td><a href="/jalpoint/edit/<%= obj.id %>">Edit</a></td>
     <td><a href="javascript:delData(<%= obj.id %>);">Delete</a></td>
-    <!--<td><a href="/jalpoint/edit/<%= obj.id %>"><%= obj.id %></a></td>
-	<td><%= obj.username %></td>-->
     <td><%= obj.flightdate %></td>
     <td><%= obj.departure %></td>
     <td><%= obj.destination %></td>
     <td><%= obj.flightclass %></td>
-    <td><%= obj.mileage %></td>
-    <td><%= obj.registeredmileage %></td>
-    <td><%= obj.fop %></td>
-    <td><%= obj.registeredfop %></td>
-    <td><%= obj.price %></td>
+    <td><%= number_with_delimiter(obj.mileage) %></td>
+    <td><%= number_with_delimiter(obj.registeredmileage) %></td>
+    <td><%= number_with_delimiter(obj.fop) %></td>
+    <td><%= number_with_delimiter(obj.registeredfop) %></td>
+    <td><%= number_with_delimiter(obj.price) %>円</td>
 </tr>
+</tbody>
 <% end %>
 </table>
