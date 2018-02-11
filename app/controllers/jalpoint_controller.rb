@@ -127,8 +127,10 @@ end
           registeredmileage:params['registeredmileage'],
           fop:params['fop'],
           registeredfop:params['registeredfop'],
-          price:params['price'])
-
+          price:params['price'],
+          returncheck:params['returncheck'],
+          returndate:params['returndate'])
+        #行きの登録
         @mileobj = Mile.create(
           username:@user.email,
           flightdate:params['flightdate'],
@@ -144,6 +146,24 @@ end
           updateuser:params['user'],
           created_at:params[Time.now],
           updated_at:params[Time.now])
+          #往復分登録
+          if obj.returncheck == 1 then
+            @mileobj = Mile.create(
+              username:@user.email,
+              flightdate:params['returndate'],
+              departure:params['destination'],
+              destination:params['departure'],
+              flightclass:params['flightclass'],
+              mileage:params['mileage'],
+              registeredmileage:params['registeredmileage'],
+              fop:params['mileage'],
+              registeredfop:params['registeredfop'],
+              price:'0',
+              registereduser:params['user'],
+              updateuser:params['user'],
+              created_at:params[Time.now],
+              updated_at:params[Time.now])
+          end
       end
       t = Mile.arel_table
       @ttlmilval = Mile.where('username = ? and flightdate >= date(now() - interval 36 month) 
@@ -176,10 +196,13 @@ end
     attr_accessor :fop
     attr_accessor :registeredfop
     attr_accessor :price
+    attr_accessor :returncheck
+    attr_accessor :returndate
 
     def initialize user:user, flightdate:flightdate, departure:departure, 
       destination:destination, flightclass:flightclass, mileage:mileage, 
-      registeredmileage:registeredmileage, fop:fop, registeredfop:registeredfop, price:price
+      registeredmileage:registeredmileage, fop:fop, registeredfop:registeredfop,
+      price:price, returncheck:returncheck, returndate:returndate
       self.user = user
       self.flightdate = flightdate
       self.departure = departure
@@ -190,6 +213,8 @@ end
       self.fop = fop
       self.registeredfop = registeredfop
       self.price = price
+      self.returncheck = returncheck
+      self.returndate = returndate
     end
 end
 =begin

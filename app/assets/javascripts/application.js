@@ -47,6 +47,17 @@ jQuery(function($){
   $('select#departure').change(cal_event);
   $('select#destination').change(cal_event);
   $('select#flightclass').change(cal_event);
+
+  $('input#returncheck').change(function(){
+	if ($(this).is(':checked')) {
+        $('input#returndate').removeAttr('disabled');
+        $('input#returndate').removeClass('disabled');
+	} else {
+        $('input#returndate').attr('disabled','disabled');
+        $('input#returndate').addClass('disabled');
+	}
+});
+
 });
 
 

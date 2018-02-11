@@ -132,6 +132,11 @@
     <td><%= number_field_tag("price") %></td>
 </tr>
 <tr>
+    <td>往復 / 出発日</td>
+    <td><%= check_box_tag("returncheck") %> 
+    <%= date_field_tag("returndate", nil, :disabled => "true", :class=>"disabled") %></td>
+</tr>
+<tr>
     <td style="background-color:#FFFFFF;"></td>
     <td style="background-color:#FFFFFF;">
     <%= submit_tag("登録", :class=>"regist" )%></td>

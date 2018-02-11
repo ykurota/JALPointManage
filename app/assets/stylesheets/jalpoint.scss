@@ -17,7 +17,7 @@ h1.title {
 
 .form tr td {
 	color: rgb(255, 255, 255);
-	background-color: rgb(248, 76, 205);
+	background-color: rgb(255, 89, 89);
 	padding: 0px 20px;
 	font-size: 14pt;
 }
@@ -26,23 +26,27 @@ h1.title {
 	display       : inline-block;
 	width: 200px;
 	height: 30px;
-	border-radius : 20%;          /* 角丸       */
+	border-radius : 10%;          /* 角丸       */
 	font-size     : 10pt;        /* 文字サイズ */
 	text-align    : center;      /* 文字位置   */
 	cursor        : pointer;     /* カーソル   */
 	//padding       : 10px 10px;   /* 余白       */
-	background    : #ff0000;     /* 背景色     */
+	background    : linear-gradient(#f19614,#f57600);     /* 背景色     */
 	color         : #ffffff;     /* 文字色     */
 	//line-height   : 1em;         /* 1行の高さ  */
-	transition    : .3s;         /* なめらか変化 */
-	box-shadow    : 4px 4px 1px #666666;  /* 影の設定 */
-	border        : 2px solid #ff0000;    /* 枠の指定 */  
+	transition    : .15s;         /* なめらか変化 */
+	box-shadow    : 1px 1px 1px #b9b8b8;  /* 影の設定 */
+	border        : 2px solid #DDD;    /* 枠の指定 */  
 }
 
+.disabled {
+    color:#dddddd;
+}
 .regist:hover {
 	box-shadow    : none;        /* カーソル時の影消去 */
-	color         : #ff0000;     /* 背景色     */
-	background    : #ffffff;     /* 文字色     */
+	//color         : linear-gradient(#f19614,#f57600);     /* 背景色     */
+	background    : #fd0000;     /* 文字色     */
+	//border        : 2px solid rgb(0, 0, 0);    /* 枠の指定 */  
 }
 
 .result {
