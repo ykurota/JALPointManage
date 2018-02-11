@@ -147,7 +147,9 @@ end
           created_at:params[Time.now],
           updated_at:params[Time.now])
           #往復分登録
-          if obj.returncheck == 1 then
+          puts obj.returncheck
+          if obj.returncheck == '1' then
+            puts("return")
             @mileobj = Mile.create(
               username:@user.email,
               flightdate:params['returndate'],
