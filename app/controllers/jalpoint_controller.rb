@@ -116,7 +116,16 @@ end
       @total = {'registeredmileage' => 0, 'registeredfop' => 0}
       #@mile = Mile.all
       @mile = Mile.where(username: @user.email).order('flightdate')
+      #登録ボタン押下
       if request.post? then
+        #年初回チェック
+        thisyear = Mile.where('username = ? and year(flightdate) = year(date(now()))',@user.email)
+        puts thisyear.count
+        if thisyear.count == 0 then
+          yearbonus = 1
+        else
+          yearbonus = 0
+        end
         obj = MyData.new(
           user:@user.email,
           flightdate:params['flightdate'],
@@ -166,15 +175,42 @@ end
               created_at:params[Time.now],
               updated_at:params[Time.now])
           end
+          #年初回ボーナス
+          if yearbonus == 1 then
+            @mileobj = Mile.create(
+              username:@user.email,
+              flightdate:params['flightdate'],
+              departure:nil,
+              destination:nil,
+              flightclass:nil,
+              mileage:'0',
+              registeredmileage:'2000',
+              fop:'0',
+              registeredfop:'5000',
+              price:'0',
+              registereduser:params['user'],
+              updateuser:params['user'],
+              created_at:params[Time.now],
+              updated_at:params[Time.now])
+          end
       end
       t = Mile.arel_table
       @ttlmilval = Mile.where('username = ? and flightdate >= date(now() - interval 36 month) 
                           and flightdate <= date(now())',
                           @user.email).select([t[:registeredmileage].sum.as('registeredmileage')]).all[0]
+      if @ttlmilval.registeredmileage.nil? then
+        @ttlmilval.registeredmileage = 0
+      end
       @ttlmilest = Mile.where('username = ? and flightdate >= date(now() - interval 36 month)',
                           @user.email).select([t[:registeredmileage].sum.as('registeredmileage')]).all[0]
+      if @ttlmilest.registeredmileage.nil? then
+        @ttlmilest.registeredmileage = 0
+      end
       @nowrank = Mile.where('username = ? and flightdate >= year(date(now())) and flightdate <= date(now())',
                           @user.email).select([t[:registeredfop].sum.as('nowfop')]).all[0]
+      if @nowrank.nowfop.nil? then
+        @nowrank.nowfop = 0
+      end
       puts 'put nowrank'
       puts @nowrank.nowfop
       @total = Mile.where('username = ? and flightdate >= date(now() - interval 1 year)',

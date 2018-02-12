@@ -13,8 +13,8 @@
     <th>現在の</br>FLY ONポイント</th>
 </tr>
 <tr>
-    <td><%= @ttlmilval.registeredmileage.to_s(:delimited) %></td>
-    <td><%= @ttlmilest.registeredmileage.to_s(:delimited) %></td>
+    <td><%= number_with_delimiter(@ttlmilval.registeredmileage) %></td>
+    <td><%= number_with_delimiter(@ttlmilest.registeredmileage) %></td>
     <% if @nowrank.nowfop >= 100000 then %>
     <% rank = "ダイヤモンド" %>
     <% elsif @nowrank.nowfop >= 80000 && @nowrank.nowfop < 100000 then %>
@@ -27,7 +27,7 @@
     <% rank = "なし" %>
     <% end %>
     <td><%= rank %></td>
-    <td><%= @nowrank.nowfop.to_s(:delimited) %></td>
+    <td><%= number_with_delimiter(@nowrank.nowfop) %></td>
 </tr>
 </tabel>
 
@@ -47,7 +47,7 @@
 <% @total.each do |fopyear| %>
 <tr>
     <td><%= fopyear.year %></td>
-    <td><%= fopyear.registeredfop.to_s(:delimited) %></td>
+    <td><%= number_with_delimiter(fopyear.registeredfop) %></td>
         <% if fopyear.registeredfop.to_i < 50000 then %>
         <% nextjgc = 50000 - fopyear.registeredfop.to_i %>
         <% elsif fopyear.registeredfop.to_i >= 50000 && fopyear.registeredfop.to_i < 80000 then %>
@@ -57,8 +57,8 @@
         <% else %>
         <% nextjgc = 0 %>
         <% end %>
-    <td><%= nextjgc.to_s(:delimited) %></td>
-    <td><%= fopyear.price.to_s(:delimited) %>円</td>
+    <td><%= number_with_delimiter(nextjgc) %></td>
+    <td><%= number_with_delimiter(fopyear.price) %>円</td>
         <% foprate = fopyear.price.to_f / fopyear.registeredfop.to_f%>
     <td><%= foprate.round(2) %>円</td>
         <% if fopyear.registeredfop.to_i < 50000 then %>
