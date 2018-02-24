@@ -1,0 +1,123 @@
+@charset "UTF-8";
+/* line 7, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+h1.title {
+  font-size: 20pt;
+  color: red;
+}
+
+/* line 13, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.form {
+  margin: 15px 10px;
+}
+
+/* line 18, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.form tr td {
+  color: white;
+  background-color: #ff5959;
+  padding: 0px 20px;
+  font-size: 14pt;
+}
+
+/* line 25, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.regist {
+  display: inline-block;
+  width: 200px;
+  height: 30px;
+  border-radius: 10%;
+  /* 角丸       */
+  font-size: 10pt;
+  /* 文字サイズ */
+  text-align: center;
+  /* 文字位置   */
+  cursor: pointer;
+  /* カーソル   */
+  background: linear-gradient(#f19614, #f57600);
+  /* 背景色     */
+  color: #ffffff;
+  /* 文字色     */
+  transition: .15s;
+  /* なめらか変化 */
+  box-shadow: 1px 1px 1px #b9b8b8;
+  /* 影の設定 */
+  border: 2px solid #DDD;
+  /* 枠の指定 */
+}
+
+/* line 42, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.disabled {
+  color: #dddddd;
+}
+
+/* line 45, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.regist:hover {
+  box-shadow: none;
+  /* カーソル時の影消去 */
+  background: #fd0000;
+  /* 文字色     */
+}
+
+/* line 52, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.result {
+  border: thin solid black;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+/* line 59, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.result table {
+  border: thin solid black;
+}
+
+/* line 63, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.result td {
+  border: thin solid black;
+}
+
+/* line 66, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.result th {
+  border: thin solid gray;
+  background-color: #26126e;
+  color: white;
+  font-size: 10pt;
+  padding: 2px;
+  table-layout: fixed;
+}
+
+/* line 86, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.jalpoint tr td {
+  color: #666;
+  padding: 10px 5px;
+}
+
+/* line 93, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+td.msg {
+  font-size: 12pt;
+}
+
+/* line 96, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+td.name {
+  font-size: 12pt;
+}
+
+/* line 99, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+td.mail {
+  font-size: 12pt;
+}
+
+/* line 102, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+td.time {
+  font-size: 9pt;
+}
+
+/* line 107, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+div.footer {
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #999;
+  margin: 50px 0px 0px 0px;
+  padding: 3px 0px 0px 0px;
+  color: #999;
+  font-size: 12pt;
+  text-align: right;
+  font-size: 9pt;
+}

@@ -1,0 +1,237 @@
+@charset "UTF-8";
+/* line 7, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+h1.title {
+  font-size: 20pt;
+  color: red;
+}
+
+/* line 13, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.form {
+  margin: 15px 10px;
+}
+
+/* line 18, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.form tr td {
+  color: white;
+  background-color: #ff5959;
+  padding: 0px 20px;
+  font-size: 14pt;
+}
+
+/* line 25, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.regist {
+  display: inline-block;
+  width: 200px;
+  height: 30px;
+  border-radius: 10%;
+  /* 角丸       */
+  font-size: 10pt;
+  /* 文字サイズ */
+  text-align: center;
+  /* 文字位置   */
+  cursor: pointer;
+  /* カーソル   */
+  background: linear-gradient(#f19614, #f57600);
+  /* 背景色     */
+  color: #ffffff;
+  /* 文字色     */
+  transition: .15s;
+  /* なめらか変化 */
+  box-shadow: 1px 1px 1px #b9b8b8;
+  /* 影の設定 */
+  border: 2px solid #DDD;
+  /* 枠の指定 */
+}
+
+/* line 42, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.disabled {
+  color: #dddddd;
+}
+
+/* line 45, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.regist:hover {
+  box-shadow: none;
+  /* カーソル時の影消去 */
+  background: #fd0000;
+  /* 文字色     */
+}
+
+/* line 52, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.result {
+  border: thin solid black;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+/* line 59, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.result table {
+  border: thin solid black;
+}
+
+/* line 63, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.result td {
+  border: thin solid black;
+}
+
+/* line 66, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.result th {
+  border: thin solid gray;
+  background-color: #26126e;
+  color: white;
+  font-size: 10pt;
+  padding: 2px;
+  table-layout: fixed;
+}
+
+/* line 86, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+.jalpoint tr td {
+  color: #666;
+  padding: 10px 5px;
+}
+
+/* line 93, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+td.msg {
+  font-size: 12pt;
+}
+
+/* line 96, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+td.name {
+  font-size: 12pt;
+}
+
+/* line 99, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+td.mail {
+  font-size: 12pt;
+}
+
+/* line 102, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+td.time {
+  font-size: 9pt;
+}
+
+/* line 107, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/jalpoint.scss */
+div.footer {
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #999;
+  margin: 50px 0px 0px 0px;
+  padding: 3px 0px 0px 0px;
+  color: #999;
+  font-size: 12pt;
+  text-align: right;
+  font-size: 9pt;
+}
+/* line 1, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 33px;
+}
+
+/* line 10, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 33px;
+}
+
+/* line 17, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 23, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+a {
+  color: #000;
+}
+/* line 26, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+a:visited {
+  color: #666;
+}
+/* line 30, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 36, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+th {
+  padding-bottom: 5px;
+}
+
+/* line 40, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+td {
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* line 47, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 52, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 56, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 62, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 70, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 81, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+/* line 87, /Users/kurotaniyukihiro/rails/JALPointManage/app/assets/stylesheets/scaffolds.scss */
+label {
+  display: block;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
